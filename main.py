@@ -12,7 +12,7 @@ if __name__ == "__main__":
     base_path = argv[1]  # C:/Users/Utente/AppData/Local/FactoryGame/Saved/SaveGames'
     file_name = argv[2]  # test.txt
     full_path = base_path + '/' + file_name
-    dropbox_path = '/test.txt'
+    dropbox_path = '/' + file_name
 
     file_loader = FileLoader(access_token)
 
@@ -24,9 +24,9 @@ if __name__ == "__main__":
         dropbox_date = file_loader.get_file_datetime(dropbox_path)
         if dropbox_date < file_date:
             file_loader.upload_file(full_path, dropbox_path)
-            print("file saved to dropbox, date: " + file_date)
+            print("file saved to dropbox, date: " + str(file_date))
         else:
-            print("cannot update file: local file is younger than dropbox file " + dropbox_date + " > " + file_date)
+            print("cannot update file: local file is younger than dropbox file " + str(dropbox_date) + " > " + str(file_date))
 
 
     EventHandler(base_path, file_name, upload_file)
