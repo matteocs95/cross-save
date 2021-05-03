@@ -10,6 +10,7 @@ watchdog = "*"
 watchgod = "*"
 discord = "*"
 dropbox = "*"
+pysimplegui = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
