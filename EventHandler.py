@@ -5,6 +5,7 @@ from watchdog.observers import Observer
 class EventHandler(FileSystemEventHandler):
 
     def __init__(self, path, file_name, callback):
+        self.path = path
         self.file_name = file_name
         self.callback = callback
 
@@ -16,5 +17,5 @@ class EventHandler(FileSystemEventHandler):
 
     def on_modified(self, event):
         if not event.is_directory and event.src_path.endswith(self.file_name):
-            self.observer.stop() # stop watching
-            self.callback() # call callback
+            self.observer.stop()
+            self.callback()

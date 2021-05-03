@@ -6,9 +6,13 @@ import time
 from datetime import datetime
 from Game import Game
 import PySimpleGUI as sg
-
+import threading
 
 if __name__ == "__main__":
+
+    def threadFunc(base_path, file_name):
+        EventHandler(base_path, file_name, upload_file)
+
     access_token = ''
     file_loader = FileLoader(access_token)
 
@@ -20,7 +24,7 @@ if __name__ == "__main__":
     def upload_file():
         file_date = datetime.now()
         dropbox_date = file_loader.get_file_datetime(dropbox_path)
-        if dropbox_date < file_date:
+        if dropbox_date is None or dropbox_date < file_date:
             file_loader.upload_file(full_path, dropbox_path)
             print("file saved to dropbox, date: " + str(file_date))
         else:
@@ -111,8 +115,13 @@ if __name__ == "__main__":
                 full_path = base_path + '/' + file_name
                 dropbox_path = '/' + file_name
                 sg.Popup(base_path + " " + file_name + " " + full_path + " " + dropbox_path + " ", keep_on_top=True)
-                EventHandler(base_path, file_name, upload_file)
+                th = threading.Thread(target=threadFunc, args=(base_path, file_name))
 
+            th.start()
+        elif event == 'Crea':
+            sg.Popup('Non ancora implementato', keep_on_top=True)
+        elif event == 'Stop':
+            sg.Popup('Non ancora implementato', keep_on_top=True)
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
 
