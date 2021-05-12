@@ -116,13 +116,12 @@ if __name__ == "__main__":
                 dropbox_path = '/' + file_name
                 sg.Popup(base_path + " " + file_name + " " + full_path + " " + dropbox_path + " ", keep_on_top=True)
                 th = threading.Thread(target=threadFunc, args=(base_path, file_name))
-
-            th.start()
+                th.start()
         elif event == 'Crea':
             sg.Popup('Non ancora implementato', keep_on_top=True)
         elif event == 'Stop':
             sg.Popup('Non ancora implementato', keep_on_top=True)
-        if event == "Exit" or event == sg.WIN_CLOSED:
+        elif event == "Exit" or event == sg.WIN_CLOSED:
             break
 
     # inizializzo tutti i giochi
